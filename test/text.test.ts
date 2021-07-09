@@ -21,4 +21,9 @@ describe('POST /text', () => {
       })
     expect(response.statusCode).toBe(201)
   })
+
+  test('should respond with a 400 status code when body content is not valid', async () => {
+    const response = await request(app).post('/text').send({})
+    expect(response.statusCode).toBe(400)
+  })
 })

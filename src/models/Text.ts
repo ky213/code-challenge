@@ -1,28 +1,51 @@
 import mongoose from 'mongoose'
-import { Language } from '../types'
 
 export type Text = {
   title: string
   content: string
-  language: Language
 }
 
-export type TextDocument = mongoose.Document & Text
+export type TextDocument = mongoose.Document & {
+  ar: Text
+  fr: Text
+  en: Text
+}
 
 export type TextDocumentUpdate = {
   _id: string
-  title?: string
-  content?: string
-  language?: Language
+  ar?: Text
+  fr?: Text
+  en?: Text
 }
 
 const textSchema = new mongoose.Schema<TextDocument>(
   {
-    title: { type: String, required: true },
-    content: { type: String, required: true },
-    language: { type: String, required: true, enum: ['ar', 'fr', 'en'] },
+    ar: {
+      title: { type: String, required: true },
+      content: { type: String, required: true },
+    },
+    fr: {
+      title: { type: String, required: true },
+      content: { type: String, required: true },
+    },
+    en: {
+      title: { type: String, required: true },
+      content: { type: String, required: true },
+    },
   },
   { timestamps: true }
+)
+
+textSchema.index(
+  {
+    'ar.title': 'text',
+    'fr.title': 'text',
+    'en.title': 'text',
+    'ar.content': 'text',
+    'fr.content': 'text',
+    'en.content': 'text',
+  },
+  { name: 'textSearch' }
 )
 
 export const TextModel = mongoose.model<TextDocument>('Text', textSchema)

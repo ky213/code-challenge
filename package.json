@@ -9,7 +9,7 @@
   "author": "ky213",
   "license": "",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/server.ts" 
+    "dev": "nodemon --exec ts-node src/server.ts"
   },
   "dependencies": {
     "@types/mongodb": "3.6.5",

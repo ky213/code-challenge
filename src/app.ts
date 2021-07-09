@@ -34,12 +34,12 @@ app.use(compression())
 
 // API
 app.get('/text', textController.getAllTexts)
+app.get('/text/mostoccurrent', textController.mostOccurrent)
 app.get('/text/:texId', textController.getTextById)
 app.post('/text', textController.storeText)
 app.put('/text', textController.updateText)
 app.get('/text/:textId/count', textController.getWordsCount)
 app.get('/text/:textId/count/:language', textController.getWordsCount)
-app.get('/text/search?=q', textController.searchText)
-app.get('/text/mostOccurrent', textController.mostOccurrent)
+app.post('/text/search', textController.searchText)
 
 export default app
